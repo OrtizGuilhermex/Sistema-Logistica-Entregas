@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class ClienteDAO {
     public void cadastrarCliente (Cliente cliente) throws SQLException {
@@ -57,6 +58,34 @@ public class ClienteDAO {
             }
         }
         return 0;
+    }
+
+    public int buscarClientePorID(int id) throws SQLException {
+        String query = """
+                SELECT nome
+                ,cpf_cnpj
+                ,endereco
+                ,cidade
+                ,estado
+                FROM Cliente
+                WHERE id = ?
+                """;
+
+        try(Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(query)){
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()){
+                rs.getInt("id");
+                rs.getString("cpf_cnpj");
+                rs.getString("endereco");
+                rs.getString("cidade");
+                rs.getString("estado");
+            }
+        }
+        return id;
     }
 
 }
