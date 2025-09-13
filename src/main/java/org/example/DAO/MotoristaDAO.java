@@ -1,5 +1,6 @@
 package org.example.DAO;
 
+import org.example.Model.Entrega;
 import org.example.Model.Motorista;
 import org.example.Util.Conexao;
 
@@ -27,8 +28,7 @@ public class MotoristaDAO {
             stmt.setString(1, motorista.getNome());
             stmt.setString(2, motorista.getCnh());
             stmt.setString(3,motorista.getVeiculo());
-            stmt.setString(4,motorista.getVeiculo());
-            stmt.setString(5,motorista.getCidade_base());
+            stmt.setString(4,motorista.getCidade_base());
             stmt.executeUpdate();
         }
     }
@@ -74,6 +74,8 @@ public class MotoristaDAO {
                 ,cnh
                 ,veiculo
                 ,cidade_base
+                FROM Motorista
+                WHERE id = ?
                 """;
 
         try (Connection conn = Conexao.conectar();
@@ -124,5 +126,44 @@ public class MotoristaDAO {
         return motoristas;
     }
 
+    public int totalEntregasPorMotorista(int motoristaID) throws SQLException {
+        String query = "SELECT COUNT(*) AS total FROM entrega WHERE motorista_id = ?";
 
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, motoristaID);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+        }
+        return 0;
+    }
+
+    public List<String> totalEntregasMotorista() throws SQLException {
+        List<String> entregas = new ArrayList<>();
+
+            String query = """
+                SELECT Motorista.nome,
+                    Motorista.id,
+                    COUNT(Entrega.id) AS TotalEntregas
+                    FROM Entrega
+                    JOIN Motorista ON Entrega.motorista_id = Motorista.id
+                    GROUP BY Motorista.id, Motorista.nome
+                    ORDER BY TotalEntregas DESC
+                """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(query)){
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+                String linha = "Motorista: " + rs.getString("nome") +
+                        " | Total de Entregas: " + rs.getDouble("TotalEntregas");
+                entregas.add(linha);
+            }
+            return entregas;
+        }
+    }
 }

@@ -131,4 +131,21 @@ public class ClienteView {
             e.printStackTrace();
         }
     }
+
+    public void deletarCliente() {
+        try {
+            System.out.println("--- Excluir Cliente ---");
+
+            System.out.print("Digite o ID do cliente a ser excluído: ");
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            String resultado = clienteService.excluirClientes(id);
+            System.out.println(resultado);
+
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao tentar excluir o cliente.");
+            e.printStackTrace();
+        }
+    }
 }
