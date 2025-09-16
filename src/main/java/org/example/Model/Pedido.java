@@ -75,4 +75,15 @@ public class Pedido {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Pedido [id=" + id +
+                ", cliente_id=" + cliente_id +
+                ", data_pedido=" + data_pedido +
+                ", volume=" + volume +
+                ", peso=" + peso +
+                ", status=" + status + "]";
+    }
+
 }

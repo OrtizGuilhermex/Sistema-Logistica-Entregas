@@ -35,7 +35,7 @@ public class MotoristaDAO {
 
     public void atualizarMotorista(Motorista motorista) throws SQLException {
         String query = """
-                UPDATE motorista
+                UPDATE Motorista
                 SET nome = ?, cnh = ?, veiculo = ?, cidade_base = ?
                 WHERE id = ?
                 """;
@@ -127,7 +127,7 @@ public class MotoristaDAO {
     }
 
     public int totalEntregasPorMotorista(int motoristaID) throws SQLException {
-        String query = "SELECT COUNT(*) AS total FROM entrega WHERE motorista_id = ?";
+        String query = "SELECT COUNT(*) AS total FROM Entrega WHERE motorista_id = ?";
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(query)) {
