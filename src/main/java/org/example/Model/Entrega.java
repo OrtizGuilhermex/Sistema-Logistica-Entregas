@@ -1,16 +1,16 @@
 package org.example.Model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Entrega {
     private int id;
     private int pedido_id;
     private int motorista_id;
-    private LocalDateTime data_saida;
-    private LocalDateTime data_entrega;
+    private LocalDate data_saida;
+    private LocalDate data_entrega;
     private String status;
 
-    public Entrega(int id, int pedido_id, int motorista_id, LocalDateTime data_saida, LocalDateTime data_entrega, String status) {
+    public Entrega(int id, int pedido_id, int motorista_id, LocalDate data_saida, LocalDate data_entrega, String status) {
         this.id = id;
         this.pedido_id = pedido_id;
         this.motorista_id = motorista_id;
@@ -19,7 +19,7 @@ public class Entrega {
         this.status = status;
     }
 
-    public Entrega(int pedido_id, int motorista_id, LocalDateTime data_saida, LocalDateTime data_entrega, String status) {
+    public Entrega(int pedido_id, int motorista_id, LocalDate data_saida, LocalDate data_entrega, String status) {
         this.pedido_id = pedido_id;
         this.motorista_id = motorista_id;
         this.data_saida = data_saida;
@@ -43,11 +43,11 @@ public class Entrega {
         this.status = status;
     }
 
-    public LocalDateTime getData_entrega() {
+    public LocalDate getData_entrega() {
         return data_entrega;
     }
 
-    public void setData_entrega(LocalDateTime data_entrega) {
+    public void setData_entrega(LocalDate data_entrega) {
         this.data_entrega = data_entrega;
     }
 
@@ -67,11 +67,11 @@ public class Entrega {
         this.pedido_id = pedido_id;
     }
 
-    public LocalDateTime getData_saida() {
+    public LocalDate getData_saida() {
         return data_saida;
     }
 
-    public void setData_saida(LocalDateTime data_saida) {
+    public void setData_saida(LocalDate data_saida) {
         this.data_saida = data_saida;
     }
 }

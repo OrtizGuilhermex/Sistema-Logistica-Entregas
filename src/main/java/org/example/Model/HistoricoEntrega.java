@@ -4,19 +4,19 @@ import java.time.LocalDateTime;
 
 public class HistoricoEntrega {
     private int id;
-    private int entreda_id;
+    private int entrega_id;
     private LocalDateTime data_evento;
     private String descricao;
 
-    public HistoricoEntrega(int id, int entreda_id, LocalDateTime data_evento, String descricao) {
+    public HistoricoEntrega(int id, int entrega_id, LocalDateTime data_evento, String descricao) {
         this.id = id;
-        this.entreda_id = entreda_id;
+        this.entrega_id = entrega_id;
         this.data_evento = data_evento;
         this.descricao = descricao;
     }
 
-    public HistoricoEntrega(int entreda_id, LocalDateTime data_evento, String descricao) {
-        this.entreda_id = entreda_id;
+    public HistoricoEntrega(int entrega_id, LocalDateTime data_evento, String descricao) {
+        this.entrega_id = entrega_id;
         this.data_evento = data_evento;
         this.descricao = descricao;
     }
@@ -37,12 +37,12 @@ public class HistoricoEntrega {
         this.descricao = descricao;
     }
 
-    public int getEntreda_id() {
-        return entreda_id;
+    public int getEntrega_id() {
+        return entrega_id;
     }
 
-    public void setEntreda_id(int entreda_id) {
-        this.entreda_id = entreda_id;
+    public void setEntrega_id(int entrega_id) {
+        this.entrega_id = entrega_id;
     }
 
     public LocalDateTime getData_evento() {
