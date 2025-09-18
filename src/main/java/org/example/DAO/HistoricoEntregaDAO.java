@@ -54,4 +54,21 @@ public class HistoricoEntregaDAO {
         }
         return historico;
     }
+
+    public boolean possuiHistoricoEntrega(int entregaID) throws SQLException{
+        String query = """
+                SELECT COUNT(*) FROM HistoricoEntrega WHERE entrega_id = ?
+                """;
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(query)){
+            stmt.setInt(1,entregaID);
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                return rs.getInt(1) > 0;
+            }
+        }
+        return false;
+    }
 }

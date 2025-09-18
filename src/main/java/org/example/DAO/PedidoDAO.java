@@ -142,7 +142,7 @@ public class PedidoDAO {
                 FROM Pedido
                 JOIN Cliente ON Pedido.cliente_id = Cliente.id
                 WHERE Cliente.estado = ?
-                AND Pedido.status = 'PENDENTE';
+                AND Pedido.status = 'PENDENTE'
                 """;
 
         try (Connection conn = Conexao.conectar();

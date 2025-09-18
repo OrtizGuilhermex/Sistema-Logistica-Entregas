@@ -134,26 +134,5 @@ public class MotoristaView {
         }
     }
 
-    public void exibirTotalEntregasMotoristas() {
-        try {
-            System.out.println("--- Relatório: Total de Entregas por Motorista ---");
-
-            List<String> entregas = motoristaService.totalEntregasMotorista();
-
-            if (entregas.isEmpty()) {
-                System.out.println("Nenhuma entrega registrada.");
-            } else {
-                for (String linha : entregas) {
-                    System.out.println(linha);
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Ocorreu um erro ao buscar o relatório.");
-            e.printStackTrace();
-        }
-    }
-
-
-
 
 }

@@ -59,13 +59,4 @@ public class MotoristaService {
             return null;
         }
     }
-
-    public List<String> totalEntregasMotorista(){
-        try{
-            return motoristaDAO.totalEntregasMotorista();
-        } catch (SQLException e){
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
-    }
 }
