@@ -1,14 +1,8 @@
 package org.example;
 
-import org.example.Service.ClienteService;
-import org.example.Service.EntregaService;
-import org.example.Service.MotoristaService;
-import org.example.Service.PedidoService;
+import org.example.Service.*;
 import org.example.Util.Conexao;
-import org.example.View.ClienteView;
-import org.example.View.EntregaView;
-import org.example.View.MotoristaView;
-import org.example.View.PedidoView;
+import org.example.View.*;
 
 import java.sql.Connection;
 import java.util.Scanner;
@@ -17,6 +11,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        ClienteService clienteService = new ClienteService();
+        ClienteView clienteView = new ClienteView(clienteService,sc);
+        MotoristaService motoristaService = new MotoristaService();
+        MotoristaView motoristaView = new MotoristaView(motoristaService,sc);
+        PedidoService pedidoService = new PedidoService();
+        PedidoView pedidoView = new PedidoView(pedidoService,sc);
+        RelatorioService relatorioService = new RelatorioService();
+        RelatorioView relatorioView = new RelatorioView(relatorioService,sc);
         EntregaService entregaService = new EntregaService();
         EntregaView entregaView = new EntregaView(entregaService,sc);
 
@@ -46,22 +48,22 @@ public class Main {
             sc.nextLine();
 
             switch (opcao) {
-                case 1 -> ;
-                case 2 -> entregaView.atualizarStatusEntrega();
-                case 3 -> entregaView.excluirEntrega();
-                case 4 -> entregaView.buscarEntregaPorID();
+                case 1 -> clienteView.cadastrarCliente();
+                case 2 -> motoristaView.cadastrarMotorista();
+                case 3 -> pedidoView.cadastrarPedido();
+                case 4 -> entregaView.InserirEntrega();
                 case 5 -> entregaView.ListarTodasEntregas();
-                case 6 -> entregaView.listarEntregasPorCidade();
-                case 7 -> entregaView.listarEntregasPorCidade();
-                case 8 -> entregaView.listarEntregasPorCidade();
-                case 9 -> entregaView.listarEntregasPorCidade();
-                case 10 -> entregaView.listarEntregasPorCidade();
+                case 6 -> entregaView.atualizarStatusEntrega();
+                case 7 -> entregaView.ListarTodasEntregas();
+                case 8 -> relatorioView.exibirTotalEntregasMotoristas();
+                case 9 -> clienteView.consultarClientesMaiorVolume();
+                case 10 -> pedidoView.listarPendentesPorEstado();
                 case 11 -> entregaView.listarEntregasPorCidade();
-                case 12 -> entregaView.listarEntregasPorCidade();
-                case 13 -> entregaView.listarEntregasPorCidade();
-                case 14 -> entregaView.listarEntregasPorCidade();
-                case 15 -> entregaView.listarEntregasPorCidade();
-                case 16 -> entregaView.listarEntregasPorCidade();
+                case 12 -> pedidoView.buscarPedidoPorCpfCnpj();
+                case 13 -> pedidoView.cancelarPedido();
+                case 14 -> entregaView.excluirEntrega();
+                case 15 -> clienteView.deletarCliente();
+                case 16 -> motoristaView.deletarMotorista();
                 case 0 -> System.out.println("👋 Saindo do sistema...");
                 default -> System.out.println("⚠ Opção inválida, tente novamente.");
             }
