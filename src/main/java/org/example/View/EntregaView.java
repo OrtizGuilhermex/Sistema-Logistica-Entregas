@@ -3,6 +3,7 @@ package org.example.View;
 import org.example.DTO.EntregaDetalhadaDTO;
 import org.example.Model.Entrega;
 import org.example.Model.Motorista;
+import org.example.Model.Pedido;
 import org.example.Service.EntregaService;
 import org.example.Util.DateUtils;
 
@@ -47,7 +48,7 @@ public class EntregaView {
 
         Entrega entrega = new Entrega(0, pedidoID,motoristaID, data_saida, data_entrega, status);
         entregaService.cadastrarEntrega(entrega);
-        System.out.println("Pedido cadastrado com sucesso!");
+        System.out.println("Entrega cadastrada com sucesso!");
     }
 
     public void atualizarStatusEntrega() {
@@ -59,7 +60,6 @@ public class EntregaView {
         String status = sc.nextLine();
 
         entregaService.atualizarStatusEntrega(id, status);
-        System.out.println("Status atualizado com sucesso!");
     }
 
     public void excluirEntrega() {
@@ -68,7 +68,6 @@ public class EntregaView {
         sc.nextLine();
 
         entregaService.excluirEntrega(id);
-        System.out.println("Entrega excluída com sucesso!");
     }
 
 
@@ -88,11 +87,58 @@ public class EntregaView {
                 System.out.println("Data de saída: " + entrega.getData_saida());
                 System.out.println("Data de Entrega: " + entrega.getData_entrega());
                 System.out.println("Status: " + entrega.getStatus());
+                System.out.println("---------------------------------");
             }else{
                 System.out.println("Nenhuma entrega encontrada com o ID informado");
             }
         } catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    public void ListarTodasEntregas(){
+        try{
+            List<EntregaDetalhadaDTO> entregas = entregaService.listarTodasEntregas();
+
+            if(entregas.isEmpty()){
+                System.out.println("Nenhuma Entrega Cadastrado");
+            } else {
+                System.out.println("---- Lista de Motoristas ----");
+                for (EntregaDetalhadaDTO entrega : entregas){
+                    System.out.println("ID da entrega: " + entrega.getEntregaId());
+                    System.out.println("ID do pedido: " + entrega.getPedidoId());
+                    System.out.println("Cliente: " + entrega.getClienteNome());
+                    System.out.println("CPF/CNPJ(Cliente): " + entrega.getClienteCpfCnpj());
+                    System.out.println("Motorista: " + entrega.getMotoristaNome());
+                    System.out.println("CNH(Motorista): " + entrega.getMotoristaCnh());
+                    System.out.println("Status: " + entrega.getStatus());
+                    System.out.println("---------------------------------");
+                }
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void listarEntregasPorCidade() {
+        System.out.print("Digite a cidade: ");
+        String cidade = sc.nextLine();
+
+        List<Entrega> entregas = entregaService.listarEntregasPorCidade(cidade);
+
+        if (entregas.isEmpty()) {
+            System.out.println("Nenhum pedido encontrado!");
+        } else {
+            System.out.println("--- Pedidos Pendentes na Cidade: " + cidade + " ---");
+            for (Entrega entrega : entregas) {
+                System.out.println("ID da entrega: " + entrega.getId());
+                System.out.println("ID do pedido: " + entrega.getPedido_id());
+                System.out.println("ID do motorista: " + entrega.getMotorista_id());
+                System.out.println("Data de saída: " + entrega.getData_saida());
+                System.out.println("Data de Entrega: " + entrega.getData_entrega());
+                System.out.println("Status: " + entrega.getStatus());
+                System.out.println("---------------------------------");
+            }
         }
     }
 

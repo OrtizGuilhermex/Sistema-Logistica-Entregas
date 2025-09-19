@@ -2,6 +2,7 @@ package org.example.Service;
 
 import org.example.DAO.EntregaDAO;
 import org.example.DAO.HistoricoEntregaDAO;
+import org.example.DTO.EntregaDetalhadaDTO;
 import org.example.Model.Entrega;
 
 import java.sql.SQLException;
@@ -25,6 +26,7 @@ public class EntregaService {
     public void atualizarStatusEntrega(int id, String novoStatus){
         try{
             entregaDAO.atualizarStatusEntrega(id, novoStatus);
+            System.out.println("Status atualizado com sucesso!");
         } catch (SQLException e){
             System.out.println("Erro ao atualizar o Status!");
             e.printStackTrace();
@@ -38,6 +40,7 @@ public class EntregaService {
                 return;
             }
             entregaDAO.excluirEntrega(entregaId);
+            System.out.println("Entrega excluída com sucesso!");
         } catch (SQLException e){
             System.out.println("Erro ao excluir Entrega!");
             e.printStackTrace();
@@ -46,16 +49,16 @@ public class EntregaService {
 
     public Entrega buscarEntregaPorID(int id){
         try{
-            entregaDAO.buscarEntregaPorID(id);
+            return  entregaDAO.buscarEntregaPorID(id);
         } catch (SQLException e){
             e.printStackTrace();
         }
         return null;
     }
 
-    public List<Entrega> listarTodasEntregas(){
+    public List<EntregaDetalhadaDTO> listarTodasEntregas(){
         try{
-            entregaDAO.listarTodasEntregas();
+            return entregaDAO.listarTodasEntregas();
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -64,7 +67,7 @@ public class EntregaService {
 
     public List<Entrega> listarEntregasPorCidade(String cidade){
         try{
-            entregaDAO.entregasAtrasadasPorCidade(cidade);
+            return entregaDAO.entregasAtrasadasPorCidade(cidade);
         } catch (SQLException e){
             e.printStackTrace();
         }
